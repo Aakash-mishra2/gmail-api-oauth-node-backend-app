@@ -1,0 +1,73 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://accounts.google.com/gsi/client" async></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Google-Sing-In</title>
+
+
+</head>
+
+<body class="m-0">
+  <h1 class="text-white w-full bg-[#04364A] m-0 max-h-fit font-bold p-4 text-4xl pl-4">
+    Email Manager App
+  </h1>
+  <div class="bg-blue-200 rounded-xl mt-8 mx-auto p-4 max-w-fit shadow hover:scale-110 transition">
+    <h1 id="userName" class="text-xl text-black font-bold m-4">
+      Welcome! Please login below
+    </h1>
+    <em>
+      <h3 id="userEmail" class="text-base text-black m-4 font-semibold"></h3>
+    </em>
+    <div 
+      id="g_id_onload" 
+      data-client_id='<%= your_client_id %>' 
+      data-context="signin" 
+      data-ux_mode="popup" 
+      data-callback="handleAuth" 
+      data-auto_prompt="false"
+      >
+    </div>
+    <div 
+      id="g_id_signin" 
+      class="g_id_signin p-4" 
+      data-type="standard" 
+      data-shape="rectangular" 
+      data-theme="outline" 
+      data-text="signin_with" 
+      data-size="large" 
+      data-logo_alignment="left"
+      >
+    </div>
+    <em>
+      <h3 id="basic" class="text-base text-blue-900 font-medium"></h3>
+    </em>
+  </div>
+  <script type="text/javascript">
+    async function sendTokenToBackend(credential) {
+      const url = new URL('http://localhost:5000/api');
+      url.searchParams.append('code', credential);
+      const localReq = await fetch(url);
+      const data = await localReq.json();
+      return data
+
+    }
+    async function handleAuth(response) {
+      let loginButton = document.getElementById('g_id_signin');
+      //console.log('Response', response);
+      const responsePayload = await sendTokenToBackend(response.credential);
+      document.getElementById('userName').innerHTML = 'Welcome,  ' + responsePayload.name;
+      document.getElementById('userEmail').innerHTML = 'Email: ' + responsePayload.email;
+      document.getElementById('basic').innerHTML = 'We are Replying to all unread emails! Please Wait!'
+      loginButton.parentNode.removeChild(loginButton);
+
+    }
+  </script>
+</body>
+
+
+
+</html>
