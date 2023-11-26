@@ -1,11 +1,11 @@
 # GMAIL MANAGER APP
 This is a full stack app for responding to your gmail mailbox while you are out on vacation.
 
-1. 'Login with Google' API and checks for new emails.
-2. App sends replies to emails to emails that have no prior replies.
+1. Check for new emails in a giver user's gmail mailbox. ( Login using Google Account)
+2. App sends a reply automatically to threads threads with no prior replies.
 3. App adds a custom 'Me_On_Vacation' label to email and move email to the label.
 
-repeat sequence of 1-3 in random intervals of 45 to 120 seconds.
+4. repeat sequence of 1-3 in random intervals of 45 to 120 seconds.
 
 ## Scripts
 ### `npm run start_frontend`
