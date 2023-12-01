@@ -54,6 +54,7 @@ Runs the backend server. Open [http://localhost:5000] to use it in your project.
 ### Basic Client-Server architecture between Client(Frontend) and Server(Backend)
 
 ## Improvement scope in this Code
+- Scope to add testing of the app in future. 
 - Better error handling of login or authorization errors and inform users on frontend to retry login.
 - Take user input on frontend about what label they want on their replies if needed.
 - User Sign out should be implemented and it must stops setInterval at the backend when trigerred.
